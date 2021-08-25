@@ -35,7 +35,7 @@ app.listen(3000, () => {
 // ////////////
 function generateSecurePathHash (expires, clientIp, secret) {
   if (!expires || !clientIp || !secret) throw new Error('Must provide all token components')
-  var input = '1629867687' + clientIp + ' ' + secret
+  var input = expires + clientIp + ' ' + secret
   var binaryHash = crypto.createHash('md5').update(input).digest()
   var base64Value = Buffer.from(binaryHash).toString('base64')
   return base64Value.replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_')
@@ -45,5 +45,6 @@ function getStreamUrl (mediaHost, originalUrl, ip, secret) {
   const expiresTimestamp = new Date(Date.now() + (1000 * 60 * 30)).getTime()
   const expires = String(Math.round(expiresTimestamp / 1000))
   const token = generateSecurePathHash(expires, ip, secret)
+  console.log('HASH: ', expires, ip, secret, token)
   return `${mediaHost}/${path.join(token, expires, originalUrl)}`
 }
