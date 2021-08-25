@@ -6,4 +6,5 @@ get_customer_url() {
   echo "http://139.59.114.247:8000/encrypted/videos/${token}/${EXPIRES}/5/2021/7/23/18/5DlUFcGml_360.mp4"
 }
 
-get_customer_url 125.235.238.6 "Supernova123!"
+# get_customer_url 125.235.238.6 "Supernova123!" 1629868070
+get_customer_url $1 $2 $3
