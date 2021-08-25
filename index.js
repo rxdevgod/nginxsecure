@@ -35,7 +35,7 @@ app.listen(3000, () => {
 // ////////////
 function generateSecurePathHash (expires, clientIp, secret) {
   if (!expires || !clientIp || !secret) throw new Error('Must provide all token components')
-  var input = expires + clientIp + ' ' + secret
+  var input = expires + ' ' + clientIp + ' ' + secret
   var binaryHash = crypto.createHash('md5').update(input).digest()
   var base64Value = Buffer.from(binaryHash).toString('base64')
   return base64Value.replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_')
