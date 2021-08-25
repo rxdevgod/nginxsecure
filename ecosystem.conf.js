@@ -1,10 +1,12 @@
 module.exports = {
   apps: [{
-    name: 'nginxSecuritySecret',
-    script: 'node index.js',
-    version: 'v1.0',
-    ignore_watch: [
-      'node_modules'
-    ]
+    name: 'nginxSecuritySecretGen',
+    script: './index.js',
+    env_production: {
+      NODE_ENV: 'production'
+    },
+    env_development: {
+      NODE_ENV: 'development'
+    }
   }]
 }
