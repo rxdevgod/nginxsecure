@@ -18,7 +18,7 @@ if (!NGINX_SECRET || !MEDIA_HOST) {
 app.get('/api/secret/get/*', (req, res, next) => {
   if (typeof req.params[0] !== 'undefined') {
     // NOTE: careful with spoofed when listen 'x-forwarded-for' from outside
-    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress
+    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress.replace('::ffff:', '')
     const secret = getStreamUrl(MEDIA_HOST, req.params[0], ip, NGINX_SECRET)
     res.json({ status: 1, data: { secret: secret } })
   } else {
